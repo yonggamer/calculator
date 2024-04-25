@@ -1,4 +1,4 @@
-name: Compile to exe
+name: Compile to exe and Upload Artifact
 
 on:
   push:
@@ -25,3 +25,9 @@ jobs:
     - name: Compile to exe
       run: |
         pyinstaller --onefile calculator.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: calculator-exe
+        path: dist/calculator.exe
