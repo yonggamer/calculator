@@ -1,0 +1,33 @@
+name: Build and Test Calculator
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run tests
+      run: python test_calculator.py
+
+    - name: Build Calculator
+      run: |
+        python -m pyinstaller --onefile calculator.py
+        mv dist/calculator ./calculator.exe
