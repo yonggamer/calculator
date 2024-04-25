@@ -1,19 +1,16 @@
-name: Build Calculator
+name: Compile to exe
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build_calculator:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Set up Python
@@ -21,23 +18,10 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install PyInstaller
+    - name: Install dependencies
       run: |
-        python -m pip install pyinstaller
+        pip install pyinstaller
 
-    - name: Verify PyInstaller Installation
+    - name: Compile to exe
       run: |
-        pyinstaller --version
-
-    - name: Print Python Version
-      run: |
-        python --version
-
-    - name: List Installed Packages
-      run: |
-        pip list
-
-    - name: Build Calculator
-      run: |
-        python -m pyinstaller --onefile calculator.py
-        mv dist/calculator ./calculator.exe
+        pyinstaller --onefile calculator.py
