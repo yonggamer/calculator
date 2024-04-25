@@ -31,8 +31,8 @@ jobs:
         ls -l dist/
 
     - name: Upload artifact
+      if: failure()
       uses: actions/upload-artifact@v2
       with:
         name: calculator-exe
         path: dist/calculator.exe
-    if: success() && steps.list-files.outputs.files-found == 'true'
