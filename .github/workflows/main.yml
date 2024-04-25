@@ -26,8 +26,13 @@ jobs:
       run: |
         pyinstaller --onefile calculator.py
 
+    - name: List files in dist directory
+      run: |
+        ls -l dist/
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: calculator-exe
         path: dist/calculator.exe
+    if: success() && steps.list-files.outputs.files-found == 'true'
