@@ -21,6 +21,10 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Install PyInstaller
+      run: |
+        python -m pip install pyinstaller
+
     - name: Build Calculator
       run: |
         python -m pyinstaller --onefile calculator.py
